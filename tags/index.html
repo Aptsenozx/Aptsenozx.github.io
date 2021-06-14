@@ -10,7 +10,7 @@
 
 
 
-<meta name="author" content="" />
+<meta name="author" content="zixuan" />
 <meta name="description" content="" />
 
 
@@ -23,12 +23,14 @@
 <meta property="og:title" content="Tags" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://aptsenozx.github.io/tags/" />
+<meta property="og:url" content="https://aptsenozx.github.io/tags/" /><meta property="og:image" content="https://aptsenozx.github.io/themes/background.jpg"/>
 
 
 
 
-<meta name="twitter:card" content="summary"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://aptsenozx.github.io/themes/background.jpg"/>
+
 <meta name="twitter:title" content="Tags"/>
 <meta name="twitter:description" content=""/>
 
@@ -45,11 +47,39 @@
   }
 
   
-
+  a:not(.ui.button) {
+    color: seagreen !important;
+  }
   
 
   
+  .inverted a:not(.ui.button) {
+     color: darkseagreen !important;
+  }
+  
 
+  
+  body.default {
+    
+    background-color: #fff;
+    
+
+    
+    background-image: url(/themes/background.jpg);
+    
+  }
+  
+
+  
+  body.dark {
+    
+    background-color: #333;
+    
+
+    
+    background-image: url(/themes/background.jpg);
+    
+  }
   
 </style>
 
@@ -68,6 +98,10 @@
   </div>
   <div class="item">
     <i class="large link home icon" title="Home" onclick="window.location.href = 'https:\/\/aptsenozx.github.io\/'"></i>
+  </div>
+  
+  <div class="item">
+    <i class="large link icon theme-switch" onclick="themeSwitch()"></i>
   </div>
   
   
@@ -205,10 +239,10 @@
     
 
     <script>
-  window.background =  null 
+  window.background = "#fff"
   window.defaultDark =  null 
-  window.backgroundDark =  null 
-  window.backgroundImageDark =  null 
+  window.backgroundDark = "#333"
+  window.backgroundImageDark = "/themes/background.jpg"
   window.darkNav =  null 
   window.maxTags =  null 
   window.hasTwitterEmbed =  null 

@@ -10,7 +10,7 @@
 
 
 
-<meta name="author" content="" />
+<meta name="author" content="zixuan" />
 <meta name="description" content="" />
 
 
@@ -23,14 +23,16 @@
 <meta property="og:title" content="First Post" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://aptsenozx.github.io/post/first-post/" /><meta property="article:section" content="post" />
+<meta property="og:url" content="https://aptsenozx.github.io/post/first-post/" /><meta property="og:image" content="https://aptsenozx.github.io/themes/background.jpg"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-06-14T09:27:51&#43;09:00" />
 <meta property="article:modified_time" content="2021-06-14T09:27:51&#43;09:00" />
 
 
 
 
-<meta name="twitter:card" content="summary"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://aptsenozx.github.io/themes/background.jpg"/>
+
 <meta name="twitter:title" content="First Post"/>
 <meta name="twitter:description" content=""/>
 
@@ -47,11 +49,39 @@
   }
 
   
-
+  a:not(.ui.button) {
+    color: seagreen !important;
+  }
   
 
   
+  .inverted a:not(.ui.button) {
+     color: darkseagreen !important;
+  }
+  
 
+  
+  body.default {
+    
+    background-color: #fff;
+    
+
+    
+    background-image: url(/themes/background.jpg);
+    
+  }
+  
+
+  
+  body.dark {
+    
+    background-color: #333;
+    
+
+    
+    background-image: url(/themes/background.jpg);
+    
+  }
   
 </style>
 
@@ -78,6 +108,10 @@
     <i class="large link home icon" title="Home" onclick="window.location.href = 'https:\/\/aptsenozx.github.io\/'"></i>
   </div>
   
+  <div class="item">
+    <i class="large link icon theme-switch" onclick="themeSwitch()"></i>
+  </div>
+  
   
 </nav>
 
@@ -100,7 +134,7 @@
             <span class="left">
               @
               
-                
+                zixuan
               
 
               | 
@@ -247,10 +281,10 @@
     
 
     <script>
-  window.background =  null 
+  window.background = "#fff"
   window.defaultDark =  null 
-  window.backgroundDark =  null 
-  window.backgroundImageDark =  null 
+  window.backgroundDark = "#333"
+  window.backgroundImageDark = "/themes/background.jpg"
   window.darkNav =  null 
   window.maxTags =  null 
   window.hasTwitterEmbed =  null 
