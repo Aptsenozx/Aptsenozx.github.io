@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>写在6月结束后 | 🏡My Blog</title>
+    <title>BWT算法总结（未完待续） | 🏡My Blog</title>
 
     
 <link href="./img/icon.png" rel="shortcut icon" type="image/x-icon" />
@@ -19,24 +19,24 @@
 
 <meta name="generator" content="Hugo 0.84.3" />
 
-<link rel="canonical" href="https://aptsenozx.github.io/post/june/" />
+<link rel="canonical" href="https://aptsenozx.github.io/post/bwt/" />
 
 
-<meta property="og:title" content="写在6月结束后" />
-<meta property="og:description" content="" />
+<meta property="og:title" content="BWT算法总结（未完待续）" />
+<meta property="og:description" content="Burrows-Wheeler Transform 该算法将原文本（序列）转换为相似的文本（序列），转换后相同的字符位置连续相邻。便于之后使用Move-to-front transform或" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://aptsenozx.github.io/post/june/" /><meta property="og:image" content="https://aptsenozx.github.io/img/June-cover.jpg" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-03T21:51:47&#43;09:00" />
-<meta property="article:modified_time" content="2021-07-03T21:51:47&#43;09:00" />
+<meta property="og:url" content="https://aptsenozx.github.io/post/bwt/" /><meta property="og:image" content="https://aptsenozx.github.io/img/background.jpg"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-05T23:08:30&#43;09:00" />
+<meta property="article:modified_time" content="2021-07-05T23:08:30&#43;09:00" />
 
 
 
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://aptsenozx.github.io/img/June-cover.jpg"/>
+<meta name="twitter:image" content="https://aptsenozx.github.io/img/background.jpg"/>
 
-<meta name="twitter:title" content="写在6月结束后"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="BWT算法总结（未完待续）"/>
+<meta name="twitter:description" content="Burrows-Wheeler Transform 该算法将原文本（序列）转换为相似的文本（序列），转换后相同的字符位置连续相邻。便于之后使用Move-to-front transform或"/>
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -138,10 +138,24 @@
   
 
   
+  <aside class="sixteen wide mobile sixteen wide tablet three wide computer column dream-single-aside">
+    
+    <div class="ui segment toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#burrows-wheeler-transform">Burrows-Wheeler Transform</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    
+  </aside>
+  
   <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
     <section class="ui top attached segment">
       <header>
-        <h1 class="ui large header">写在6月结束后<span class="sub header">
+        <h1 class="ui large header">BWT算法总结（未完待续）<span class="sub header">
             <span class="left">
               @
               
@@ -150,17 +164,17 @@
 
               | 
                   
-                    Saturday, Jul 3, 2021
+                    Monday, Jul 5, 2021
                   
                 
 
-              | 6 minutes read
+              | 2 minutes read
 
               
               | Update at
                 
                   
-                    Saturday, Jul 3, 2021
+                    Monday, Jul 5, 2021
                   
                 
               
@@ -171,10 +185,10 @@
   <a href="#" class="save-as-image" title="Save as image" onclick="savePostAsImg()">
     <i class="save icon"></i>
   </a>
-  <a href="https://twitter.com/intent/tweet?text=%e5%86%99%e5%9c%a86%e6%9c%88%e7%bb%93%e6%9d%9f%e5%90%8e&url=https%3a%2f%2faptsenozx.github.io%2fpost%2fjune%2f" title="Twitter">
+  <a href="https://twitter.com/intent/tweet?text=BWT%e7%ae%97%e6%b3%95%e6%80%bb%e7%bb%93%ef%bc%88%e6%9c%aa%e5%ae%8c%e5%be%85%e7%bb%ad%ef%bc%89&url=https%3a%2f%2faptsenozx.github.io%2fpost%2fbwt%2f" title="Twitter">
     <i class="twitter icon"></i>
   </a>
-  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2faptsenozx.github.io%2fpost%2fjune%2f" title="Facebook">
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2faptsenozx.github.io%2fpost%2fbwt%2f" title="Facebook">
     <i class="facebook icon"></i>
   </a>
 </span>
@@ -188,41 +202,141 @@
         
 
         <hr>
-<p>6月过的很快，初夏就这么结束了，盛夏就要开始了。</p>
-<p>梅雨季节，总是不太好过。本以为这次终于可以幸免，但还是在月底撑不住还是又去了医院。</p>
-<p>6月好像，一直忽晴忽雨的，天气是这样，我的身体状态也是这样。下午犯困是常有的，还有越来越频繁地肚子胀气，以及睡不好到最后天天都没什么精神。</p>
-<p>最后一天忙完了发表，忙着跑去役所办手续，买买东西，看医生领药回家。做完饭吃完饭已经什么都不想做了。于是6月的总结和各种杂七杂八的事情就拖到了今天。</p>
-<p>不安感特别强的时候，总想翻翻运势看，看看是不是这段时间就是一个艰难的考验时期，看看什么时候才能好一点。昨天在医院等的时候，就翻出来三妈的六月运势看，有一段话还是挺触动到我的：</p>
-<blockquote>
-<p>这系列食相都在帮助你更好地认识自己，以及准确来说到底什么会让你开心。你正在用新的眼光看待自己的职业天赋和个人生活，你在更多地了解那些让你这么惹人爱的特质。通常你都是在忙着做事，看不到自己已经令人惊艳地进化，成长和成熟了，已经能够比两年前处理更多事情了。一个食相会帮助你“追上”今天这个全新且提升了的人，我很确定你会被自己看见的那个人感动到的。是时候好好表扬自己一下了。</p>
-</blockquote>
-<p>（来自豆瓣星译社及译者Pa&amp;扭森森）</p>
-<p>两年前的自己吗。</p>
-<p>大概是第一次梅雨季，抑郁出现吧。身边没有朋友，研究室也没有什么归属感，又是自己住。在家崩溃大哭不能自已。好像从那时起，开始慢慢感受到自己内心世界的崩塌，重构，看清了自己，想要什么不想要什么，什么会让我开心。第二年梅雨，因为疫情开始，各种生活的转变，脱离原先的轨道，伴随着失望委屈和不安挣扎，还是没能躲过抑郁。之前的经验方法因为疫情又已经不那么适用了。梅雨季结束了，盛夏结束了，秋天也跌跌绊绊的过去了，冬天，一个平平淡淡的新年之后，论文，考试，找房子，许许多多的负面情绪就好像一次次冲向我的沙袋，挤压的窒息，各种生理反应再也没法忽视，于是开始了吃药治疗。</p>
-<p>就这么挣扎着走到现在了。</p>
-<p>要说和之前比比，当然是进化了，成长了吧。毕竟多少有意识到问题了，也有处理的经验了，尽管自己还是不能完全靠自己的力量调节过来，但也不会轻易崩溃了。经常自己能很快意识到，“啊，进到负面的状态里了”，然后做点什么调整下放松下自己。再加上有小F在身边，也能及时的帮我从负面情绪的漩涡里出来，两个人一起也能规律的按时吃饭，每天也有人可以说说话、相互帮帮忙，给了我很大的支持和温暖的力量。比之前好很多啦。</p>
-<p>就是在这样的没什么不满意的生活里，最近这些日子好像还是在一条钢索上颤颤巍巍的走，稍不留神就会滑落下去，更多的时候就是没跌下去，可是也上不来，没有力气和精神往前走。</p>
-<p>其实早就分析了无数次什么缘由导致我至此，但其中太多因素都是没办法的，就好像宇宙给了我这么个考验，没有归属感的环境，没有可以聊天的朋友，失去和身边环境的连接，疫情开始出门总是担忧，在意识里给出门玩这件事加了无数个不做的理由：疫情危险，研究还没进展干嘛不学习，去一趟路费都不少&hellip;</p>
-<p>结果就是自我封闭，不断内耗。和以前的我感觉完全不一样的状态，以前的自己很爱聊天很爱表达自己，每天很有规律很有精神，不会周末也不会睡到很晚，想做什么就去做，想去哪玩就自己立刻计划去，想吃什么就跑去吃，有很多想尝试的事情，愿意去多接触人去给自己的生活增加可能性。当时的生活真的很充实快乐。</p>
-<p>可是生活就是这么……严格？或者说戏剧化？这个课程完成得不错给你点奖励，别高兴得太久，下一个考验说不定就让戳到你的弱点让你狼狈不堪的栽了。知道经过这些考验会成长，但是痛也是真的痛。</p>
-<hr>
-<p>（没一口气写完，分割一下继续）</p>
-<p>现在于我而言还是在打地基吧。</p>
-<p>本来以为坍塌后只要恢复了“正常”就是已经重新建立起来了，但其实不是的，我的内部还存在一些问题，日复一日自欺欺人的无视着这些问题，在这样一个特殊的全世界在卡关的时代，一切不坚定、不稳固的内在都会轻易侵蚀着自己，在谁都看不到的地方。</p>
-<p>比如说虽然我规律的早睡早起，三餐都好好做饭吃饭，各种蔬菜水果酸奶都好好吃，肉少油少，每天也有跟着帕梅拉蹦蹦跳跳，也控制自己刷社交媒体的时间。但还是没能阻止生理上呼啸而来的抗议，他们因为“问题”的存在而不堪重负，在潜意识里无数待解决的想法和情绪奔涌着，看起来每天睡快八小时，可是身体并没有得到真的休息。所以就导致了早上总是睡不醒，身体越来越疲倦，肠胃也越来越不舒服，本来很爱吃的自己也变的没什么食欲，吃不下饭。白天坐在书桌前困得不行，可是躺下后却有各种想法在脑子里窜来窜去</p>
-<p>这种状态就好像我的周末，虽然没有干活，但是感觉也没有休息到。并没有用休息日放松自己，做自己想要做的事，而经常是一段用视频游戏和无所事事来拖延、逃避学习压力的时间。逃避两天、喘息一下，然后极不情愿的迎来周一继续扛着那份压力焦虑和不安。</p>
-<p>这样肯定不行啊。休息日就是要去积蓄能量啊，不管是真正的好好踏实睡觉，还是做一些平时想做但没空做的事情，然后才能有精神积极的面对学习压力啊。</p>
-<p>前两天看到武志红老师的视频，讲自我封闭和内耗。↓</p>
-<p><a href="https://www.bilibili.com/video/BV13V411x7x5?share_source=copy_web"></a></p>
-<p>突然就有一种“被点醒”的感觉，这不就是我吗。</p>
-<p>生命力没有释放出来，生命没有展开，那些被压抑的能量就转向自我攻击，一边自己想挥拳出去，一边用另一只手阻挡回来，就是一个谁都看不到的自我消耗的过程。身边也没能建立起足够的人际关系，生活非常单一，就慢慢形成了封闭。</p>
-<p>现在不管是疫情大环境，还是身处的研究室，都很难去和人建立连接。好像全世界都在面临的这个拉远人与人距离的挑战下，对我的小世界又封锁了几个可能的出口。所以，就姑且用书写的方式去表达自己吧。</p>
-<p>好久没这样写长文记录心情了。回头看看那些曾经无心走过的路的，看看曾经自己经历过的那些事是怎么带我走到了现在这里。这种回顾和表达是很重要的，不知道曾几何时，渐渐丢失了这个习惯。大学开始就会在每年年末写长文，总结自己的一年，平时有什么情绪的时候，尤其是比较低落的时候，也会在自习室里敲敲打打地写文章记录。可是这两年，明明发生了很多很多事，也思考了很多很多，可偏偏忘记了静下心来去书写了，好像更多的去压抑自己地心情，“因为身边没有能说话的人”，用这样的理由为借口就不去表达了，就憋的越来越难受，自我对话也越来越多，内耗就越来越严重了。</p>
-<p>如果可以的话，每个月都书写一下吧，给自己一个flag。</p>
-<p>反正这里大概也没有人看，要写在blog里发出去的话，总归有动力让自己好好讲清楚要表达的东西。写在手账里吧，碍于篇幅写不长；写在微博吧，又有好些现实中知道的人可能会看到，感觉怪怪的；找朋友聊也不好意思说这么多自己的经历和心情。所以就试着写在blog里，就当自己的一个小小世界。</p>
-<p>若有人偶然看到，就当是无数时间线交汇于此，看到一个同样在这个世界努力生活的人的内心世界的小小一隅吧。</p>
-<p>谢谢驻足(oﾟvﾟ)ノ</p>
-<hr>
+<h2 id="burrows-wheeler-transform">Burrows-Wheeler Transform</h2>
+<p>该算法将原文本（序列）转换为相似的文本（序列），转换后相同的字符位置连续相邻。便于之后使用Move-to-front transform或游程编码（Run-length encoding）等对文本进行压缩。</p>
+<p>BWT的pseudo code如下：</p>
+<pre><code>function BWT(string s)
+		create a table, where the rows are all possible rotations of s;
+		sort rows alphabetically;
+		return (last column of the table)
+</code></pre><p>简单来说，这个算法是输入一个序列s，经过一系列变换后，返回其所创建表格的最后一列。这个最后一列就是转换后序列。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Index 1</th>
+<th style="text-align:center">Rotate</th>
+<th style="text-align:center">Index 2</th>
+<th style="text-align:center">Sort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">banana$</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">$banana</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">anana$b</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">a$banan</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">nana$ba</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">ana$ban</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">ana$ban</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">anana$b</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">na$bana</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">banana$</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">a$banan</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">na$bana</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">$banana</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">nana$ba</td>
+</tr>
+</tbody>
+</table>
+<p>该算法是基于后缀和字典排序。以banana为例：</p>
+<ul>
+<li>
+<p>首先给所要转换的序列s末尾添加一个$，该标识在字典排序中小于任何其他字符。banana添加$后变成banana$；</p>
+<p>可以理解为$之前表示一个后缀，将该序列向左依次旋转，得到的就是Rotate列；</p>
+</li>
+<li>
+<p>然后对Rotate列按照首字母进行排序，得到Sort列，表格中Index 2列表示Sort中的字符串在Rotate中对应的位置；</p>
+</li>
+<li>
+<p>输出Sort列中的最后一列字符annb$aa。（这句话有点绕，就是按顺序输出Sort列中所有字符串的最后一个字符）</p>
+</li>
+</ul>
+<p>这样banana经过BWT转换后得到的结果就是annbaa。（这里带不带$应该是都可以，不影响）</p>
+<p>下面是BWT转换的python代码。</p>
+<p>首先输入一串字符串，然后在句尾加上一个$字符：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+words <span style="color:#f92672">=</span> []
+a <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Enter a string:&#34;</span>)
+a <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;$&#39;</span>
+print(a)
+</code></pre></div><p>这里删除list变量是因为在Jupyter Notebook中，如果多次重复运行这个代码时，总会显示list这个变量有冲突，所以在这里先进行删除。第一次运行的时候不用删除就可以顺利运行。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">del</span> list
+words <span style="color:#f92672">=</span> list(a)
+</code></pre></div><p>这一步输出旋转序列（Rotate列）和排序后的序列（Sort列）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">table<span style="color:#f92672">=</span>[a[i:]<span style="color:#f92672">+</span>a[:i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(a))]
+print(<span style="color:#e6db74">&#34;table:&#34;</span>)
+print(table)
+table_sorted<span style="color:#f92672">=</span>table[:] <span style="color:#75715e">#there must add [:]!</span>
+table_sorted<span style="color:#f92672">.</span>sort()
+print(<span style="color:#e6db74">&#34;table_sorted:&#34;</span>)
+print(table_sorted)
+print(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</code></pre></div><p>然后依次找在排序后的序列table_sorted中的字符串对应在原Rotate序列table中的哪一项，</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indexlist<span style="color:#f92672">=</span>[]
+<span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> table_sorted:
+    index1 <span style="color:#f92672">=</span> table<span style="color:#f92672">.</span>index(t)
+    <span style="color:#66d9ef">if</span> index1 <span style="color:#f92672">&lt;</span> len(a)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:
+        index1 <span style="color:#f92672">=</span> index1<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">else</span>:
+        index1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    index2 <span style="color:#f92672">=</span> table_sorted<span style="color:#f92672">.</span>index(table[index1])
+    indexlist<span style="color:#f92672">.</span>append(index2)
+    print(index1,index2)
+r <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([row[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> table_sorted])
+
+print(<span style="color:#e6db74">&#34;r:&#34;</span>)
+print(r)
+print(<span style="color:#e6db74">&#34;indexlist:&#34;</span>)
+print(indexlist)
+</code></pre></div><p>1</p>
+<pre><code>Enter a string:banana
+banana$
+</code></pre><pre><code>r:
+annb$aa
+indexlist:
+[4, 0, 5, 6, 3, 1, 2]
+</code></pre><p>2</p>
+<pre><code>Enter a string:bananabanana
+bananabanana$
+</code></pre><pre><code>r:
+annnnbba$aaaa
+indexlist:
+[8, 0, 7, 9, 10, 11, 12, 5, 6, 1, 2, 3, 4]
+</code></pre><p>3</p>
+<pre><code>Enter a string:bananabananabanana
+bananabananabanana$
+</code></pre><pre><code>r:
+annnnnnbbbaa$aaaaaa
+indexlist:
+[12, 0, 10, 11, 13, 14, 15, 16, 17, 18, 7, 8, 9, 1, 2, 3, 4, 5, 6]
+</code></pre><hr>
+
       </article>
     </section>
 

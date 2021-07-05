@@ -4,4 +4,6 @@
 
   
 
-[{"categories":["随笔"],"description":"\u003chr\u003e","tags":["日记"],"title":"写在6月结束后","url":"https://aptsenozx.github.io/post/june/"},{"categories":["读书笔记✍"],"description":"\u003chr\u003e","tags":["心理"],"title":"《人生十二法则》笔记","url":"https://aptsenozx.github.io/post/first-post/"}]
+  
+
+[{"categories":null,"description":"Burrows-Wheeler Transform 该算法将原文本（序列）转换为相似的文本（序列），转换后相同的字符位置连续相邻。便于之后使用Move-to-front transform或","tags":null,"title":"BWT算法总结（未完待续）","url":"https://aptsenozx.github.io/post/bwt/"},{"categories":["随笔"],"description":"\u003chr\u003e","tags":["日记"],"title":"写在6月结束后","url":"https://aptsenozx.github.io/post/june/"},{"categories":["读书笔记✍"],"description":"\u003chr\u003e","tags":["心理"],"title":"《人生十二法则》笔记","url":"https://aptsenozx.github.io/post/first-post/"}]
