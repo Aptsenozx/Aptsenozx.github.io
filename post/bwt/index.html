@@ -144,6 +144,9 @@
       <nav id="TableOfContents">
   <ul>
     <li><a href="#burrows-wheeler-transform">Burrows-Wheeler Transform</a></li>
+    <li><a href="#bwt-code">BWT Code</a></li>
+    <li><a href="#bwt的还原">BWT的还原</a></li>
+    <li><a href="#待续">（待续）</a></li>
   </ul>
 </nav>
     </div>
@@ -168,7 +171,7 @@
                   
                 
 
-              | 2 minutes read
+              | 3 minutes read
 
               
               | Update at
@@ -278,6 +281,7 @@
 </li>
 </ul>
 <p>这样banana经过BWT转换后得到的结果就是annbaa。（这里带不带$应该是都可以，不影响）</p>
+<h2 id="bwt-code">BWT Code</h2>
 <p>下面是BWT转换的python代码。</p>
 <p>首先输入一串字符串，然后在句尾加上一个$字符：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
@@ -297,7 +301,7 @@ table_sorted<span style="color:#f92672">.</span>sort()
 print(<span style="color:#e6db74">&#34;table_sorted:&#34;</span>)
 print(table_sorted)
 print(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
-</code></pre></div><p>然后依次找在排序后的序列table_sorted中的字符串对应在原Rotate序列table中的哪一项，</p>
+</code></pre></div><p>然后依次找在排序后的序列table_sorted中的字符串对应在原Rotate序列table中的哪一项，输出相应的index。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indexlist<span style="color:#f92672">=</span>[]
 <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> table_sorted:
     index1 <span style="color:#f92672">=</span> table<span style="color:#f92672">.</span>index(t)
@@ -314,28 +318,36 @@ print(<span style="color:#e6db74">&#34;r:&#34;</span>)
 print(r)
 print(<span style="color:#e6db74">&#34;indexlist:&#34;</span>)
 print(indexlist)
-</code></pre></div><p>1</p>
+</code></pre></div><p>BWT常用于基因测序数据的压缩。
+由于基因序列（ATCG）中存在大量重复的字符串，比如CGCGCGCGATCG这段序列，CG就重复出现多次。这时使用BWT算法进行转换后，就可以将相同的字符转换到相邻位置，便于后续的压缩。压缩方法后面会进行补充。</p>
+<p>还是以banana为例子，可以进行一下测试：</p>
+<p>下面是输入&rsquo;banana&rsquo;的结果：
+1</p>
 <pre><code>Enter a string:banana
 banana$
 </code></pre><pre><code>r:
 annb$aa
 indexlist:
 [4, 0, 5, 6, 3, 1, 2]
-</code></pre><p>2</p>
+</code></pre><p>下面是输入两个&rsquo;banana&rsquo;的结果：
+2</p>
 <pre><code>Enter a string:bananabanana
 bananabanana$
 </code></pre><pre><code>r:
 annnnbba$aaaa
 indexlist:
 [8, 0, 7, 9, 10, 11, 12, 5, 6, 1, 2, 3, 4]
-</code></pre><p>3</p>
+</code></pre><p>下面是输入三个&rsquo;banana&rsquo;的结果：
+3</p>
 <pre><code>Enter a string:bananabananabanana
 bananabananabanana$
 </code></pre><pre><code>r:
 annnnnnbbbaa$aaaaaa
 indexlist:
 [12, 0, 10, 11, 13, 14, 15, 16, 17, 18, 7, 8, 9, 1, 2, 3, 4, 5, 6]
-</code></pre><hr>
+</code></pre><p>可以看到随着序列的重复次数增多，转换后会有连续的&rsquo;n&rsquo;和&rsquo;a'，这对于后续压缩储存是非常有利的。</p>
+<h2 id="bwt的还原">BWT的还原</h2>
+<h2 id="待续">（待续）</h2>
       </article>
     </section>
 
