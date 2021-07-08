@@ -146,6 +146,7 @@
     <li><a href="#burrows-wheeler-transform">Burrows-Wheeler Transform</a></li>
     <li><a href="#bwt-code">BWT Code</a></li>
     <li><a href="#bwt的还原">BWT的还原</a></li>
+    <li><a href="#bwt还原-python-code-lf-mapping">BWT还原 python code （LF Mapping）</a></li>
   </ul>
 </nav>
     </div>
@@ -170,7 +171,7 @@
                   
                 
 
-              | 3 minutes read
+              | 4 minutes read
 
               
               | Update at
@@ -207,11 +208,11 @@
 <h2 id="burrows-wheeler-transform">Burrows-Wheeler Transform</h2>
 <p>该算法将原文本（序列）转换为相似的文本（序列），转换后相同的字符位置连续相邻。便于之后使用Move-to-front transform或游程编码（Run-length encoding）等对文本进行压缩。</p>
 <p>BWT的pseudo code如下：</p>
-<pre><code>function BWT(string s)
+<pre><code>function BWT　(string s)
 		create a table, where the rows are all possible rotations of s;
 		sort rows alphabetically;
-		return (last column of the table)
-</code></pre><p>简单来说，这个算法是输入一个序列s，经过一系列变换后，返回其所创建表格的最后一列。这个最后一列就是转换后序列。</p>
+		return (last column of the table s')
+</code></pre><p>简单来说，这个算法是输入一个序列s，经过一系列变换后，返回其所创建表格的最后一列s'。这个最后一列就是转换后序列。</p>
 <table>
 <thead>
 <tr>
@@ -346,7 +347,21 @@ indexlist:
 [12, 0, 10, 11, 13, 14, 15, 16, 17, 18, 7, 8, 9, 1, 2, 3, 4, 5, 6]
 </code></pre><p>可以看到随着序列的重复次数增多，转换后会有连续的&rsquo;n&rsquo;和&rsquo;a'，这对于后续压缩储存是非常有利的。</p>
 <h2 id="bwt的还原">BWT的还原</h2>
-<p>（待续）</p>
+<p>一个直观的理解就是，因为我们得到的最后一列s'：annb$aa，经过排序后就是Sort矩阵的第一列：$aaabnn，而又因为是向左旋转得到的，其实第一列就是最后一列的后一列（可以把矩阵旋转想象成一个立体的圆柱体 ！(￣ ︶ ￣）所以把第一列加到最后一列（s'）的后面，然后对此时的第一列进行排序：</p>
+<p>（图）</p>
+<p>如第二个表中所示，排序后第一列又变成了原来的Sort矩阵第一列$aaabnn了。</p>
+<p>重复这个过程，再次把s'：annb$aa加到当前这个矩阵前面，相当于把Sort矩阵的前两列移到了最后一列后面。依次类推，每次都将最后一列s&rsquo;加到当前矩阵前面，然后排序，直到得到与原序列长度相同的序列，也就是将s&rsquo;加到了前（n-1）列之前（n为原序列长度）。</p>
+<h2 id="bwt还原-python-code-lf-mapping">BWT还原 python code （LF Mapping）</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ibwt</span>(r, indexlist):
+    s<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+    x <span style="color:#f92672">=</span> indexlist[<span style="color:#ae81ff">0</span>]
+    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> r:
+        s <span style="color:#f92672">=</span> s <span style="color:#f92672">+</span> r[x]
+        x <span style="color:#f92672">=</span> indexlist[x]
+    s <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>strip(<span style="color:#e6db74">&#39;$&#39;</span>)
+    <span style="color:#66d9ef">return</span> s
+print(ibwt(r, indexlist))
+</code></pre></div><p>（待续）</p>
 <hr>
       </article>
     </section>
