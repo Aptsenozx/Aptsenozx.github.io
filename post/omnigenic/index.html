@@ -212,8 +212,7 @@
       <article class="main">
         
 
-        <hr>
-<p>论文阅读笔记。
+        <p>论文阅读笔记。
 基本上也是大概的翻译，因为还刚刚起步开始学习，还不太会抓重点，就通篇一边翻译一边理解记录了。方便自己以后回顾查阅。</p>
 <p>论文原文：
 <a href="https://www.sciencedirect.com/science/article/pii/S0092867419304003">Trans Effects on Gene Expression Can Drive Omnigenic Inheritance</a></p>
@@ -255,10 +254,10 @@
 <div align=center>
 <img src=/img/Omnigenic/Fig3.png />
 </div>  
-<p>$$ Y_i $$：表型值；</p>
-<p>$$ γ_j $$：直接影响，表示核心基因j每单位表达量的改变对表型值期待值$E(Y_i)$的影响</p>
-<p>$$ x_{ij} $$：基因j在个体i中的表达量</p>
-<p>$$ ε_{Y_i} $$：环境和随机因素造成的误差</p>
+<p>$ Y_i $：表型值；</p>
+<p>$ γ_j $：直接影响，表示核心基因j每单位表达量的改变对表型值期待值$ E(Y_i) $的影响</p>
+<p>$ x_{ij} $：基因j在个体i中的表达量</p>
+<p>$ ε_{Y_i} $：环境和随机因素造成的误差</p>
 <p>这个模型假设了core基因对表型值的影响是线性的。</p>
 <p>在这里没有考虑基因之间的相互作用项，SNP上的GWAS效应大小只是组织特异性效应的总和。</p>
 <p>接下来分析顺式和反式效应对遗传力的贡献。</p>
@@ -283,11 +282,11 @@
 <p>Model1：核心基因不受共同调控。表达往往是相对独立的。</p>
 <p>Model2：核心基因通常是共同调节的。要么同一方向共同调节，要么相反方向负向共同调节。</p>
 <h3 id="snp对疾病风险的影响大小">SNP对疾病风险的影响大小</h3>
-<p>$$ SNP_l $$：核心基因j的eQTL</p>
-<p>$$α_{lj}$$：$$SNP_l$$影响的大小。每additional copy引起的表达量的增加。</p>
-<p>$$Δ_l$$：表型Y由于一个alternate allele copy而引起的期待值的改变</p>
-<p>首先假设基因j是$SNP_l$作为eQTL的唯一核心基因，则$$Δ_l=α_{lj}γ_j$$。</p>
-<p>如果该$$SNP_l$$是trans作用的，则$Δ_l$会非常小。但是如果$$SNP_l$$是多个核心基因的eQTL时，总表型影响时trans作用对每个核心基因调控作用的总和：</p>
+<p>$ SNP_l $：核心基因j的eQTL</p>
+<p>$ α_{lj} $：$ SNP_l $影响的大小。每additional copy引起的表达量的增加。</p>
+<p>$ Δ_l $：表型Y由于一个alternate allele copy而引起的期待值的改变</p>
+<p>首先假设基因j是$ SNP_l $作为eQTL的唯一核心基因，则$ Δ_l=α_{lj}γ_j $。</p>
+<p>如果该$ SNP_l $是trans作用的，则$ Δ_l $会非常小。但是如果$ SNP_l $是多个核心基因的eQTL时，总表型影响时trans作用对每个核心基因调控作用的总和：</p>
 <div align=center>
 <img src=/img/Omnigenic/Fig8.png />
 </div>  
@@ -298,12 +297,12 @@
 <div align=center>
 <img src=/img/Omnigenic/Fig9.png />
 </div>  
-<p>虽然期望值为0，但是任何核心基因（$$α_{lj}γ_j$$）间的correlation都会放大方差（下图中图D的情形）。</p>
+<p>虽然期望值为0，但是任何核心基因（$ α_{lj}γ_j $）间的correlation都会放大方差（下图中图D的情形）。</p>
 <div align=center>
 <img src=/img/Omnigenic/Fig10.png style="zoom:100%;"/>
 </div>  
 <ul>
-<li>考虑peripheral master regulators。直观的理解就是第一张图里的图C。因为有时GWAS找到的不是核心基因而是master regulators。如果$$α_{lj}γ_j$$间倾向于由相同的sign，则会带来更大的effect。
+<li>考虑peripheral master regulators。直观的理解就是第一张图里的图C。因为有时GWAS找到的不是核心基因而是master regulators。如果$ α_{lj}γ_j $间倾向于由相同的sign，则会带来更大的effect。
 在实际中的例子是，影响转录因子表达的variant，可能对很多基因都有coordinated effect。</li>
 </ul>
 <h3 id="discussion">Discussion</h3>
@@ -569,7 +568,17 @@
 <script src="/js/main.js"></script>
 <script src="/js/theme.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+<script>
+  window.MathJax = {
+  tex: {
+    tags: 'ams',  
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+};
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-chtml.js"></script>
     
 
 

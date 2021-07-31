@@ -202,7 +202,7 @@
     <article class="ui attached segment card dream-card">
   <a class="image" href="https://aptsenozx.github.io/post/omnigenic/">
     
-    <img src="/img/default3.jpg" alt="Omnigenic 全基因组模型论文笔记" />
+    <img src="/img/default2.jpg" alt="Omnigenic 全基因组模型论文笔记" />
     
   </a>
 
@@ -216,7 +216,7 @@
       </p>
     </div>
     <div class="description">
-      <hr>
+      
     </div>
   </div>
 
@@ -485,7 +485,17 @@
 <script src="/js/main.js"></script>
 <script src="/js/theme.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+
+<script>
+  window.MathJax = {
+  tex: {
+    tags: 'ams',  
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+};
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-chtml.js"></script>
     
 
 
