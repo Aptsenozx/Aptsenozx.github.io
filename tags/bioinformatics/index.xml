@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>学习笔记💻 on 🏡My Blog</title>
-    <link>https://aptsenozx.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
-    <description>Recent content in 学习笔记💻 on 🏡My Blog</description>
+    <title>Bioinformatics on 🏡My Blog</title>
+    <link>https://aptsenozx.github.io/tags/bioinformatics/</link>
+    <description>Recent content in Bioinformatics on 🏡My Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
     <copyright>&lt;a rel=&#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;&lt;img alt=&#34;知识共享许可协议&#34; style=&#34;border-width:0&#34; src=&#34;https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png&#34; /&gt;&lt;/a&gt;&lt;br /&gt;本作品采用&lt;a rel=&#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议&lt;/a&gt;进行许可。&lt;br /&gt;&lt;br /&gt;背景使用了 &lt;a href=&#34;https://www.pexels.com/zh-cn/&#34; target=&#34;_blank&#34;&gt;Pexels&lt;/a&gt; 上 &lt;a href=&#34;https://www.pexels.com/zh-cn/@minan1398&#34; target=&#34;_blank&#34;&gt;Min An&lt;/a&gt; 拍摄的&lt;a href=&#34;https://www.pexels.com/zh-cn/photo/1454794/&#34; target=&#34;_blank&#34;&gt;图片&lt;/a&gt;。</copyright>
-    <lastBuildDate>Thu, 29 Jul 2021 17:10:19 +0900</lastBuildDate><atom:link href="https://aptsenozx.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Jul 2021 17:10:19 +0900</lastBuildDate><atom:link href="https://aptsenozx.github.io/tags/bioinformatics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Omnigenic</title>
       <link>https://aptsenozx.github.io/post/omnigenic/</link>
       <pubDate>Thu, 29 Jul 2021 17:10:19 +0900</pubDate>
       
       <guid>https://aptsenozx.github.io/post/omnigenic/</guid>
-      <description>&lt;hr&gt;</description>
-    </item>
-    
-    <item>
-      <title>BWT算法总结（未完待续）</title>
-      <link>https://aptsenozx.github.io/post/bwt/</link>
-      <pubDate>Mon, 05 Jul 2021 23:08:30 +0900</pubDate>
-      
-      <guid>https://aptsenozx.github.io/post/bwt/</guid>
       <description>&lt;hr&gt;</description>
     </item>
     
