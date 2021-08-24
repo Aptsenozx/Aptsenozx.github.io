@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Bcftools | 🏡My Blog</title>
+
+    
+<link href="./img/icon.png" rel="shortcut icon" type="image/x-icon" />
+
+
+
+
+<meta name="author" content="子鱼" />
+<meta name="description" content="日常学习生活记录" />
+
+
+
+<meta name="generator" content="Hugo 0.84.3" />
+
+<link rel="canonical" href="https://aptsenozx.github.io/post/bcftools/" />
+
+
+<meta property="og:title" content="Bcftools" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://aptsenozx.github.io/post/bcftools/" /><meta property="og:image" content="https://aptsenozx.github.io/img/bcftools-cover.jpg" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-24T17:22:05&#43;09:00" />
+<meta property="article:modified_time" content="2021-08-24T17:22:05&#43;09:00" />
+
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://aptsenozx.github.io/img/bcftools-cover.jpg"/>
+
+<meta name="twitter:title" content="Bcftools"/>
+<meta name="twitter:description" content=""/>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  .ui.header a:not(.ui.button):hover {
+    text-decoration: underline;
+  }
+
+  
+  a:not(.ui.button) {
+    color: seagreen !important;
+  }
+  
+
+  
+  .inverted a:not(.ui.button) {
+     color: darkseagreen !important;
+  }
+  
+
+  
+  body.default {
+    
+    background-color: #fff;
+    
+
+    
+    background-image: url(./img/background.jpg);
+    
+  }
+  
+
+  
+  body.dark {
+    
+    background-color: #333;
+    
+
+    
+    background-image: url(./img/background.jpg);
+    
+  }
+  
+</style>
+
+    
+
+
+
+<link rel="stylesheet" data-highlight href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/tomorrow.min.css" />
+
+
+
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+  </head>
+
+  <body class="default">
+    
+<nav class="ui secondary menu dream-menu dream-nav">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = 'https:\/\/aptsenozx.github.io\/'"></i>
+  </div>
+  
+  <div class="item">
+    <i class="large link icon theme-switch" onclick="themeSwitch()"></i>
+  </div>
+  
+  
+  <div class="item">
+    <i class="large link search icon" onclick="toggleSearch()"></i>
+  </div>
+  
+</nav>
+
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          <div class="dream-max-width">
+            
+<div class="ui relaxed centered grid dream-grid dream-grid-single">
+  
+  
+  
+  
+
+  
+  <aside class="sixteen wide mobile sixteen wide tablet three wide computer column dream-single-aside">
+    
+    <div class="ui segment toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#数据下载和预处理">数据下载和预处理</a></li>
+    <li><a href="#合并多个文件">合并多个文件</a></li>
+    <li><a href="#view命令">view命令</a></li>
+    <li><a href="#按名称选择单个样本">按名称选择单个样本</a></li>
+    <li><a href="#筛选变体类型">筛选变体类型</a></li>
+    <li><a href="#根据变体id筛选">根据变体ID筛选</a></li>
+    <li><a href="#根据染色体位置筛选">根据染色体位置筛选</a></li>
+    <li><a href="#合并多个样本个体的vcf文件">合并多个样本个体的vcf文件</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#query-指定输出格式">query 指定输出格式</a></li>
+    <li><a href="#编辑染色体名称">编辑染色体名称</a></li>
+    <li><a href="#不显示表头查看">不显示表头查看</a></li>
+    <li><a href="#仅查看表头">仅查看表头</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    
+  </aside>
+  
+  <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    <section class="ui top attached segment">
+      <header>
+        <h1 class="ui large header">Bcftools<span class="sub header">
+            <span class="left">
+              @
+              
+                子鱼
+              
+
+              | 
+                  
+                    Tuesday, Aug 24, 2021
+                  
+                
+
+              | 5 minutes read
+
+              
+              | Update at
+                
+                  
+                    Tuesday, Aug 24, 2021
+                  
+                
+              
+            </span>
+
+            
+            <span class="dream-share">
+  <a href="#" class="save-as-image" title="Save as image" onclick="savePostAsImg()">
+    <i class="save icon"></i>
+  </a>
+  <a href="https://twitter.com/intent/tweet?text=Bcftools&url=https%3a%2f%2faptsenozx.github.io%2fpost%2fbcftools%2f" title="Twitter">
+    <i class="twitter icon"></i>
+  </a>
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2faptsenozx.github.io%2fpost%2fbcftools%2f" title="Facebook">
+    <i class="facebook icon"></i>
+  </a>
+</span>
+
+            
+          </span>
+        </h1>
+      </header>
+
+      <article class="main">
+        
+
+        <hr>
+<p>转载并翻译国外的这篇博客：</p>
+<p><a href="https://www.nagraj.net/notes/bcftools/#samplename">bcftools Primer | VP Nagraj</a></p>
+<p>另结合其他一些博客进行了补充，记录一下便于自己学习。参考链接在文末。</p>
+<hr>
+<p>bcftools用来处理variant call（<code>.vcf</code>）格式数据。官方<a href="https://samtools.github.io/bcftools/bcftools.html">操作手册</a>。</p>
+<h2 id="数据下载和预处理">数据下载和预处理</h2>
+<ol>
+<li>首先，现在1000 genome项目中20130502版本的所有文件，这些文件都是压缩文件格式（<code>.vcf.gz</code>），每个都有<code>.tbi</code>格式的索引文件</li>
+<li>下载<a href="https://www.ncbi.nlm.nih.gov/clinvar/">ClinVar</a>网站的<code>.vcf.gz</code>和<code>.tbi</code>文件</li>
+<li>创建<code>.vcf.gz</code>文件，该文件是筛选后的染色体1-22，使其仅包含ClinVar中的位点</li>
+<li>为新创建的<code>.vcf.gz</code>文件建立tabix索引</li>
+</ol>
+<p>每个步骤可能需要很长时间，并且需要足够的储存容量（约20G），并且需要已经安装wget，parallel，bcftools，tabix。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">## download 1000 genomes vcf files</span>
+wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/*.vcf.gz*
+
+<span style="color:#75715e">## download clinvar vcf</span>
+wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh37/clinvar.vcf.gz*
+
+<span style="color:#75715e">## use parallel to restrict each chromosome (chr1 to chr22) to clinvar sites</span>
+find . -type f -name <span style="color:#e6db74">&#34;ALL.chr[1-9]*vcf.gz&#34;</span> | parallel <span style="color:#e6db74">&#34;bcftools view {} -R clinvar.vcf.gz --output-type z --output {}.clinvar.vcf.gz&#34;</span>
+
+<span style="color:#75715e">## make sure all vcf.gz files are tabix indexed</span>
+find . -type f -name <span style="color:#e6db74">&#34;ALL.chr[1-9]*.clinvar.vcf.gz&#34;</span> | parallel <span style="color:#e6db74">&#34;tabix {}&#34;</span>
+</code></pre></div><hr>
+<h2 id="合并多个文件">合并多个文件</h2>
+<p>如果想要连接（堆叠）多个vcf文件，可以使用<code>bcftools concat</code>，只要输入的文件共享相同的field（来源和调用都一致的应该就可以）。</p>
+<p>现在将染色体1-22合并到一个文件中。</p>
+<p>参数<code>--output-type z</code>表示指定的输出将被压缩：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bcftools concat ALL.chr*.clinvar.vcf.gz --output-type z --output all.clinvar.vcf.gz
+</code></pre></div><p>注意：<code>bcftools concat</code>不等同于<code>bcftools merge</code>。</p>
+<h2 id="view命令">view命令</h2>
+<p><code>view</code>命令可以用于VCF和BCF格式的转换，用法如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bcftools view view.vcf.gz -O u -o view.bcf
+</code></pre></div><p><code>-O</code>参数指定输出文件的类型，<code>b</code>代表压缩后的BCF文件，<code>u</code>代表未经压缩的BCF文件，<code>z</code>代表压缩后的VCF文件，<code>v</code>代表未经压缩的VCF文件；<code>-o</code>参数指定输出文件的名字。</p>
+<h2 id="按名称选择单个样本">按名称选择单个样本</h2>
+<p><code>bcftools view -s</code> 按照样本ID选择子集。</p>
+<p><code>all.clinvar.vcf.gz</code>包含多个样本。这里，将为NA20536 和 HG03718 样本创建单独的压缩文件，以及每个文件的索引（使用<code>bcftools index -t</code>）:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bcftools view -s NA20536 all.clinvar.vcf.gz --output-type z --output NA20536.clinvar.vcf.gz
+bcftools view -s HG03718 all.clinvar.vcf.gz --output-type z --output HG03718.clinvar.vcf.gz
+
+<span style="color:#75715e">## note: bcftools index -t is equivalent to tabix here</span>
+bcftools index -t NA20536.clinvar.vcf.gz
+bcftools index -t HG03718.clinvar.vcf.gz
+</code></pre></div><h2 id="筛选变体类型">筛选变体类型</h2>
+<p>bcftools view -v可以筛选文件，指定其包含的变体类型为&quot;snps&quot;, &ldquo;indels&rdquo;, &ldquo;mnps&rdquo;, &ldquo;other&rdquo;。</p>
+<p>仅包含indel类型：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bcftools view -v indels NA20536.clinvar.vcf.gz
+</code></pre></div><pre><code>CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA20536
+1	978603	rs35881187	CCT	C	100	PASS	AC=2;AF=0.479233;AN=2;NS=2504;DP=14705;EAS_AF=0.8036;AMR_AF=0.6412;AFR_AF=0.0348;EUR_AF=0.5487;SAS_AF=0.5593;VT=INDEL	GT	1|1
+1	984171	rs140904842	CAG	C	100	PASS	AC=2;AF=0.920527;AN=2;NS=2504;DP=7127;EAS_AF=0.9891;AMR_AF=0.9769;AFR_AF=0.7602;EUR_AF=0.9742;SAS_AF=0.9714;VT=INDEL	GT	1|1
+1	1168239	rs533071750	C	CG	100	PASS	AC=0;AF=0.000599042;AN=2;NS=2504;DP=9648;EAS_AF=0;AMR_AF=0.0029;AFR_AF=0;EUR_AF=0.001;SAS_AF=0;AA=?|GGGGGGG|GGGGGGGG|unsure;VT=INDEL;EX_TARGET	GT	0|0
+1	2343991	rs570192538	CCA	C	100	PASS	AC=0;AF=0.00459265;AN=2;NS=2504;DP=9045;EAS_AF=0;AMR_AF=0;AFR_AF=0.0174;EUR_AF=0;SAS_AF=0;VT=INDEL	GT	0|0
+1	2435830	rs555614613	TTCC	T	100	PASS	AC=0;AF=0.00579073;AN=2;NS=2504;DP=15005;EAS_AF=0;AMR_AF=0.0029;AFR_AF=0.0204;EUR_AF=0;SAS_AF=0;VT=INDEL;EX_TARGET	GT	0|0
+1	2492946	rs149579135	AG	A	100	PASS	AC=0;AF=0.00359425;AN=2;NS=2504;DP=17775;EAS_AF=0;AMR_AF=0.0014;AFR_AF=0.0129;EUR_AF=0;SAS_AF=0;AA=G|G|-|deletion;VT=INDEL	GT	0|0
+.	.	.	.	.	.	.	.	.	.
+</code></pre><h2 id="根据变体id筛选">根据变体ID筛选</h2>
+<p>假设我们有一下RSID，包含在一个<code>snps.list</code>文件里：</p>
+<pre><code>rs145413551
+rs34610323
+rs79548709
+rs371163239
+rs148716910
+rs374704178
+</code></pre><p>我们可以使用该文件筛选变体（SNP）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bcftools view --include ID<span style="color:#f92672">==</span>@snps.list NA20536.clinvar.vcf.gz
+</code></pre></div><pre><code>CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA20536
+17	648546	rs34610323	C	T	100	PASS	AC=0;AF=0.0159744;AN=2;NS=2504;DP=21874;EAS_AF=0;AMR_AF=0.0058;AFR_AF=0.0575;EUR_AF=0;SAS_AF=0;AA=C|||;VT=SNP;EX_TARGET	GT	0|0
+2	31620566	rs145413551	G	T	100	PASS	AC=0;AF=0.000199681;AN=2;NS=2504;DP=19652;EAS_AF=0;AMR_AF=0;AFR_AF=0.0008;EUR_AF=0;SAS_AF=0;AA=G|||;VT=SNP;EX_TARGET	GT	0|0
+21	45707000	rs374704178	G	A	100	PASS	AC=0;AF=0.000399361;AN=2;NS=2504;DP=11479;EAS_AF=0;AMR_AF=0;AFR_AF=0.0015;EUR_AF=0;SAS_AF=0;AA=G|||;VT=SNP;EX_TARGET	GT	0|0
+5	151721	rs148716910	G	A	100	PASS	AC=0;AF=0.00279553;AN=2;NS=2504;DP=18789;EAS_AF=0;AMR_AF=0.0014;AFR_AF=0.0098;EUR_AF=0;SAS_AF=0;AA=G|||;VT=SNP;EX_TARGET	GT	0|0
+8	1841816	rs79548709	C	T	100	PASS	AC=0;AF=0.00519169;AN=2;NS=2504;DP=16683;EAS_AF=0;AMR_AF=0;AFR_AF=0.0197;EUR_AF=0;SAS_AF=0;AA=C|||;VT=SNP;EX_TARGET	GT	0|0
+8	3889458	rs371163239	T	A	100	PASS	AC=0;AF=0.000199681;AN=2;NS=2504;DP=15669;EAS_AF=0;AMR_AF=0.0014;AFR_AF=0;EUR_AF=0;SAS_AF=0;AA=T|||;VT=SNP;EX_TARGET	GT	0|0
+</code></pre><h2 id="根据染色体位置筛选">根据染色体位置筛选</h2>
+<p><code>--regions</code>可以根据染色体，以及染色体上的position筛选vcf文件中的变体。</p>
+<p>比如说，我们可以单独取5号染色体的snp信息进行查看：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bcftools view --regions <span style="color:#ae81ff">5</span> NA20536.vcf.gz
+</code></pre></div><pre><code>CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA20536
+5	40417	esv3603720;esv3603721	G	,	100	PASS	AC=0,0;AF=0.000199681,0.000798722;AN=2;CS=DUP_uwash;END=176437;NS=2504;SVTYPE=CNV;DP=16231;EAS_AF=0,0;AMR_AF=0,0;AFR_AF=0,0;EUR_AF=0,0.003;SAS_AF=0.001,0.001;VT=SV;EX_TARGET	GT	0|0
+5	124186	esv3603731	T		100	PASS	AC=0;AF=0.000199681;AN=2;CS=DUP_gs;END=163795;NS=2504;SVTYPE=DUP;DP=19153;EAS_AF=0;AMR_AF=0;AFR_AF=0;EUR_AF=0.001;SAS_AF=0;VT=SV;EX_TARGET	GT	0|0
+5	143490	rs142208662	C	T	100	PASS	AC=0;AF=0.00279553;AN=2;NS=2504;DP=19664;EAS_AF=0;AMR_AF=0.0014;AFR_AF=0.0098;EUR_AF=0;SAS_AF=0;AA=c|||;VT=SNP;EX_TARGET	GT	0|0
+5	151721	rs148716910	G	A	100	PASS	AC=0;AF=0.00279553;AN=2;NS=2504;DP=18789;EAS_AF=0;AMR_AF=0.0014;AFR_AF=0.0098;EUR_AF=0;SAS_AF=0;AA=G|||;VT=SNP;EX_TARGET	GT	0|0
+5	156288	rs193920840	C	T	100	PASS	AC=0;AF=0.000199681;AN=2;NS=2504;DP=17617;EAS_AF=0;AMR_AF=0;AFR_AF=0;EUR_AF=0;SAS_AF=0.001;AA=C|||;VT=SNP;EX_TARGET	GT	0|0
+5	162045	rs568109142	G	A	100	PASS	AC=0;AF=0.000199681;AN=2;NS=2504;DP=15391;EAS_AF=0.001;AMR_AF=0;AFR_AF=0;EUR_AF=0;SAS_AF=0;AA=G|||;VT=SNP;EX_TARGET	GT	0|0
+.	.	.	.	.	.	.	.	.
+</code></pre><p>第一列可以看到全部都是5号染色体。</p>
+<p>也可以指定更具体地区域位置，比如说10号染色体的80000:900000：</p>
+<pre><code>bcftools view --regions 10:800000-900000 NA20536.clinvar.vcf.gz
+</code></pre><pre><code>CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA20536
+10	859076	rs144565605	T	C	100	PASS	AC=0;AF=0.000199681;AN=2;NS=2504;DP=15608;EAS_AF=0;AMR_AF=0;AFR_AF=0.0008;EUR_AF=0;SAS_AF=0;AA=T|||;VT=SNP;EX_TARGET	GT	0|0
+10	860990	rs144883024	G	A	100	PASS	AC=0;AF=0.00259585;AN=2;NS=2504;DP=18990;EAS_AF=0;AMR_AF=0.0014;AFR_AF=0.0091;EUR_AF=0;SAS_AF=0;AA=G|||;VT=SNP;EX_TARGET	GT	0|0
+10	871816	rs79707128	T	A	100	PASS	AC=0;AF=0.0211661;AN=2;NS=2504;DP=21039;EAS_AF=0;AMR_AF=0.0058;AFR_AF=0.0703;EUR_AF=0;SAS_AF=0.0092;AA=T|||;VT=SNP;EX_TARGET	GT	0|0
+</code></pre><h2 id="合并多个样本个体的vcf文件">合并多个样本个体的vcf文件</h2>
+<p>利用<code>bcftools merge</code>合并多个individual样本的vcf文件：</p>
+<pre><code>bcftools merge NA20536.clinvar.vcf.gz HG03718.clinvar.vcf.gz --output-type z --output NA20536.HG03718.clinvar.vcf.gz
+</code></pre><pre><code>CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA20536	HG03718
+1	865628	rs41285790	G	A	100	PASS	NS=2504;AA=g|||;VT=SNP;EX_TARGET;DP=33950;AF=0.00279553;EAS_AF=0;AMR_AF=0.0072;AFR_AF=0;EUR_AF=0.005;SAS_AF=0.0041;AN=4;AC=0	GT	0|0	0|0
+1	879481	rs113383096	G	C	100	PASS	NS=2504;AA=g|||;VT=SNP;EX_TARGET;DP=27530;AF=0.0197684;EAS_AF=0;AMR_AF=0.0058;AFR_AF=0.0719;EUR_AF=0;SAS_AF=0;AN=4;AC=0	GT	0|0	0|0
+1	880944	rs112433394	G	A	100	PASS	NS=2504;AA=g|||;VT=SNP;EX_TARGET;DP=41446;AF=0.00259585;EAS_AF=0;AMR_AF=0;AFR_AF=0.0098;EUR_AF=0;SAS_AF=0;AN=4;AC=0	GT	0|0	0|0
+1	887409	rs113226136	G	C	100	PASS	NS=2504;AA=g|||;VT=SNP;EX_TARGET;DP=39832;AF=0.00119808;EAS_AF=0;AMR_AF=0;AFR_AF=0.0045;EUR_AF=0;SAS_AF=0;AN=4;AC=0	GT	0|0	0|0
+1	887989	rs112966263	A	G	100	PASS	NS=2504;AA=G|||;VT=SNP;EX_TARGET;DP=36768;AF=0.00579073;EAS_AF=0;AMR_AF=0;AFR_AF=0.0219;EUR_AF=0;SAS_AF=0;AN=4;AC=0	GT	0|0	0|0
+1	889450	rs58931985	C	A	100	PASS	NS=2504;AA=C|||;VT=SNP;EX_TARGET;DP=32298;AF=0.00159744;EAS_AF=0;AMR_AF=0;AFR_AF=0.0061;EUR_AF=0;SAS_AF=0;AN=4;AC=0	GT	0|0	0|0
+.	.	.	.	.	.	.	.	.	.	.
+</code></pre><h1 id="bcftools-merge和concat区别">bcftools merge和concat区别</h1>
+<p>concat可以进行vcf的“纵”向合并，比如不同染色体的vcf文件，或者snp和indel进行的合并。但是样品顺序必须保持一致。</p>
+<p>merge可以进行vcf的“横”向合并，比如单个样本的vcf文件的合并。</p>
+<p>concat和merge的共同点是输入文件必须是bgzip压缩，且有索引。</p>
+<h2 id="query-指定输出格式">query 指定输出格式</h2>
+<p><code>query</code>可以定制vcf文件的格式。通过表达式来指定输出格式，可定制化程度比<code>view</code>高。</p>
+<p>-f参数通过表达式指定输出格式，其中变量的写法如下：</p>
+<ol>
+<li>%CHROM
+代表VCF文件中染色体那一列，其他的列，比如<code>POS</code>, <code>ID</code>, <code>REF</code>, <code>ALT</code>, <code>QUAL</code>, <code>FILTER</code>也是类似的写法</li>
+<li><input disabled="" type="checkbox"> 对于FORMAT字段的信息，必须要中括号括起来</li>
+<li>%SAMPLE
+代表样本名称</li>
+<li>%GT
+代表FORMAT字段中genotype的信息</li>
+<li>\t
+代表制表符分隔</li>
+<li>\n
+代表新的一行</li>
+</ol>
+<p>比如<code>query</code>解析每个人的基因型：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bcftools query -f <span style="color:#e6db74">&#39;[%CHROM\t%POS\t%SAMPLE\t%TGT\n]&#39;</span> NA20536.HG03718.clinvar.vcf.gz
+</code></pre></div><pre><code>CHROM	POS	SAMPLE	GT
+1	865628	NA20536	G|G
+1	865628	HG03718	G|G
+1	879481	NA20536	G|G
+1	879481	HG03718	G|G
+1	880944	NA20536	G|G
+1	880944	HG03718	G|G
+.	.	.	.
+</code></pre><h2 id="编辑染色体名称">编辑染色体名称</h2>
+<p>可以使用<code>bcftools annotate —rename-chrs</code></p>
+<p>这个命令需要提供有制表符分割文件，说明原名称和新名称，格式为“oldname\tnewname”</p>
+<pre><code>1\tchr1
+2\tchr2
+3\tchr3
+4\tchr4
+5\tchr5
+6\tchr6
+7\tchr7
+8\tchr8
+9\tchr9
+10\tchr10
+11\tchr11
+12\tchr12
+13\tchr13
+14\tchr14
+15\tchr15
+16\tchr16
+17\tchr17
+18\tchr18
+19\tchr19
+20\tchr20
+21\tchr21
+22\tchr22
+</code></pre><p>上面这个文件就表示染色体命名从1-22的数字变成“chr1”-“chr22”</p>
+<pre><code>bcftools annotate --rename-chrs chromosomes.txt NA20536.clinvar.vcf.gz
+</code></pre><pre><code>CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA20536
+chr1	865628	rs41285790	G	A	100	PASS	AC=0;AF=0.00279553;AN=2;NS=2504;DP=16975;EAS_AF=0;AMR_AF=0.0072;AFR_AF=0;EUR_AF=0.005;SAS_AF=0.0041;AA=g|||;VT=SNP;EX_TARGET	GT	0|0
+chr1	879481	rs113383096	G	C	100	PASS	AC=0;AF=0.0197684;AN=2;NS=2504;DP=13765;EAS_AF=0;AMR_AF=0.0058;AFR_AF=0.0719;EUR_AF=0;SAS_AF=0;AA=g|||;VT=SNP;EX_TARGET	GT	0|0
+chr1	880944	rs112433394	G	A	100	PASS	AC=0;AF=0.00259585;AN=2;NS=2504;DP=20723;EAS_AF=0;AMR_AF=0;AFR_AF=0.0098;EUR_AF=0;SAS_AF=0;AA=g|||;VT=SNP;EX_TARGET	GT	0|0
+chr1	887409	rs113226136	G	C	100	PASS	AC=0;AF=0.00119808;AN=2;NS=2504;DP=19916;EAS_AF=0;AMR_AF=0;AFR_AF=0.0045;EUR_AF=0;SAS_AF=0;AA=g|||;VT=SNP;EX_TARGET	GT	0|0
+chr1	887989	rs112966263	A	G	100	PASS	AC=0;AF=0.00579073;AN=2;NS=2504;DP=18384;EAS_AF=0;AMR_AF=0;AFR_AF=0.0219;EUR_AF=0;SAS_AF=0;AA=G|||;VT=SNP;EX_TARGET	GT	0|0
+chr1	889450	rs58931985	C	A	100	PASS	AC=0;AF=0.00159744;AN=2;NS=2504;DP=16149;EAS_AF=0;AMR_AF=0;AFR_AF=0.0061;EUR_AF=0;SAS_AF=0;AA=C|||;VT=SNP;EX_TARGET	GT	0|0
+.	.	.	.	.	.	.	.	.	.
+</code></pre><h2 id="不显示表头查看">不显示表头查看</h2>
+<p>使用<code>-H</code>：</p>
+<pre><code>bcftools view -H NA20536.HG03718.clinvar.vcf.gz
+</code></pre><h2 id="仅查看表头">仅查看表头</h2>
+<p>使用<code>-h</code>：</p>
+<pre><code>bcftools view -h clinvar.vcf.gz
+</code></pre><h2 id="参考链接">参考链接</h2>
+<p><a href="https://blog.csdn.net/qq_41211527/article/details/89480891">bcftools的功能介绍_小青儿的生信小课堂-CSDN博客_bcftools</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1626585">bcftools学习笔记(一)</a></p>
+      </article>
+    </section>
+
+    
+
+    
+    <article class="ui segment utterances-comments" data-html2canvas-ignore>
+      <script
+        src="https://utteranc.es/client.js"
+        repo="Aptsenozx/Aptsenozx.github.io"
+        issue-term="og:title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+      </script>
+    </article>
+    
+
+    
+  </div>
+</div>
+
+
+            <footer class="ui basic center aligned segment" style="background-color: transparent;">
+              
+              <p>© 2021 🏡My Blog</p>
+              
+
+              <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+
+              
+            </footer>
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            <header class="ui basic very padded segment dream-header">
+  
+  <div class="ui small circular image">
+    <img src="/img/%e5%b0%8f%e5%94%af.jpg" alt="avatar" />
+  </div>
+  
+
+  <div class="content">
+    <h1 class="ui medium header">子鱼的博客<span class="sub header">但行好事，莫问前程</span>
+    </h1>
+
+    <article class="ui horizontal list">
+      
+      <a class="item" href="/categories">
+        <i class="th list icon" title="All Categories"></i>
+      </a>
+      <a class="item" href="/tags">
+        <i class="tags icon" title="All Tags"></i>
+      </a>
+    </article>
+
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+
+    
+
+    
+    
+    
+          <div class="dream-tags">
+          
+          
+          
+            <a class="ui label" href="/tags/bioinfo/" title="Bioinfo">
+              Bioinfo
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/cs/" title="CS">
+              CS
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E5%BF%83%E7%90%86/" title="心理">
+              心理
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E6%97%A5%E8%AE%B0/" title="日记">
+              日记
+            </a>
+          
+          </div>
+    
+
+    
+  </div>
+</header>
+
+
+<div class="ui relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article class="ui segment">
+      <div class="ui medium header">Social Links</div>
+      <nav class="ui secondary menu dream-menu dream-socials">
+  
+
+  
+  <div class="item">
+    <a href="mailto:zixuan.wang1206@gmail.com">
+      <i class="large mail icon" title="Email"></i>
+    </a>
+  </div>
+  
+
+  
+  <div class="item">
+    <a href="https://twitter.com/o_sisen" target="_blank">
+      <i class="large twitter icon" title="Twitter"></i>
+    </a>
+  </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <div class="item">
+    <a href="https://github.com/Aptsenozx" target="_blank">
+      <i class="large github icon" title="GitHub"></i>
+    </a>
+  </div>
+  
+
+  
+
+  
+</nav>
+
+    </article>
+  </div>
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+    <article class="ui segment">
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。<br /><br />背景使用了 <a href="https://www.pexels.com/zh-cn/" target="_blank">Pexels</a> 上 <a href="https://www.pexels.com/zh-cn/@minan1398" target="_blank">Min An</a> 拍摄的<a href="https://www.pexels.com/zh-cn/photo/1454794/" target="_blank">图片</a>。
+    </article>
+    
+  </div>
+
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    
+    <div class="ui segment" id="dream-search">
+  <div class="ui search">
+    <div class="ui transparent input">
+      <input class="prompt" type="text" placeholder="Search" />
+    </div>
+    <div class="results"></div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $.getJSON('https:\/\/aptsenozx.github.io\//index.json', function (data) {
+      $('.ui.search').search({
+        source: data,
+        searchFields: ['title'],
+        showNoResults: false,
+      })
+    })
+  })
+</script>
+<script src="/js/search.js"></script>
+
+    
+
+    
+
+    <script>
+  window.background = "#fff"
+  window.defaultDark =  true 
+  window.backgroundDark = "#333"
+  window.backgroundImageDark = "./img/background.jpg"
+  window.darkNav =  null 
+  window.maxTags =  null 
+  window.hasTwitterEmbed =  null 
+  window.fixedNav =  null 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+
+<script>
+  window.MathJax = {
+  tex: {
+    tags: 'ams',  
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+};
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-chtml.js"></script>
+    
+
+
+
+<script src="/js/scrollToTop.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/languages/clojure.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/languages/ocaml.min.js"></script>
+
+
+
+<script>
+  hljs.highlightAll()
+  setHighlightTheme()
+
+  function setHighlightTheme() {
+    var isDark = localStore.getItem('hugo-theme-dream-is-dark')
+    isDark = isDark ? isDark : window.defaultDark ? 'y' : isDark
+
+    var lightTheme = "tomorrow"
+    var darkTheme = "tomorrow-night"
+    var theme = isDark === 'y' ? darkTheme : lightTheme
+
+    $('link[data-highlight]').attr('href', 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/' + theme + '.min.css')
+    $('pre').css('background', isDark === 'y' ? '#333' : '')
+  }
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.1"></script>
+<script src="/js/post.js" defer></script>
+
+
+    
+
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-98295641-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  </body>
+</html>
