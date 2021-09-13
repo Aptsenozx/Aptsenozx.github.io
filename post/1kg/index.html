@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>1000 Genome Project数据库学习笔记 | 🏡My Blog</title>
+    <title>1000 Genome数据库学习笔记 | 🏡My Blog</title>
 
     
 <link href="./img/icon.png" rel="shortcut icon" type="image/x-icon" />
@@ -22,7 +22,7 @@
 <link rel="canonical" href="https://aptsenozx.github.io/post/1kg/" />
 
 
-<meta property="og:title" content="1000 Genome Project数据库学习笔记" />
+<meta property="og:title" content="1000 Genome数据库学习笔记" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aptsenozx.github.io/post/1kg/" /><meta property="og:image" content="https://aptsenozx.github.io/img/background.jpg"/><meta property="article:section" content="post" />
@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://aptsenozx.github.io/img/background.jpg"/>
 
-<meta name="twitter:title" content="1000 Genome Project数据库学习笔记"/>
+<meta name="twitter:title" content="1000 Genome数据库学习笔记"/>
 <meta name="twitter:description" content=""/>
 
 
@@ -143,13 +143,13 @@
     <div class="ui segment toc">
       <nav id="TableOfContents">
   <ul>
-    <li><a href="#一简介"><strong>一、简介</strong></a>
+    <li><a href="#一简介">一、简介</a>
       <ul>
-        <li><a href="#populations"><strong>Populations</strong></a></li>
-        <li><a href="#populationscodes"><strong>Populations codes</strong></a></li>
+        <li><a href="#populations">Populations</a></li>
+        <li><a href="#populationscodes">Populations codes</a></li>
       </ul>
     </li>
-    <li><a href="#二数据查询与下载"><strong>二、数据查询与下载</strong></a>
+    <li><a href="#二数据查询与下载">二、数据查询与下载</a>
       <ul>
         <li><a href="#查询数据">查询数据</a></li>
         <li><a href="#下载数据">下载数据</a></li>
@@ -172,7 +172,7 @@
   <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
     <section class="ui top attached segment">
       <header>
-        <h1 class="ui large header">1000 Genome Project数据库学习笔记<span class="sub header">
+        <h1 class="ui large header">1000 Genome数据库学习笔记<span class="sub header">
             <span class="left">
               @
               
@@ -202,7 +202,7 @@
   <a href="#" class="save-as-image" title="Save as image" onclick="savePostAsImg()">
     <i class="save icon"></i>
   </a>
-  <a href="https://twitter.com/intent/tweet?text=1000%20Genome%20Project%e6%95%b0%e6%8d%ae%e5%ba%93%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0&url=https%3a%2f%2faptsenozx.github.io%2fpost%2f1kg%2f" title="Twitter">
+  <a href="https://twitter.com/intent/tweet?text=1000%20Genome%e6%95%b0%e6%8d%ae%e5%ba%93%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0&url=https%3a%2f%2faptsenozx.github.io%2fpost%2f1kg%2f" title="Twitter">
     <i class="twitter icon"></i>
   </a>
   <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2faptsenozx.github.io%2fpost%2f1kg%2f" title="Facebook">
@@ -221,7 +221,7 @@
         <hr>
 <h1 id="1000-genome"><strong>1000 GENOME</strong></h1>
 <p><a href="https://www.internationalgenome.org/">1000 Genomes | A Deep Catalog of Human Genetic Variation</a></p>
-<h2 id="一简介"><strong>一、简介</strong></h2>
+<h2 id="一简介">一、简介</h2>
 <p>千人基因组计划（1000 Genomes，<a href="http://www.internationalgenome.org/">http://www.internationalgenome.org/</a> ，简称1KG）于2008-2015年开启的对人的基因组进行测序一个项目，目的是建立人类突变和分型的共同数据库。虽然这个项目已经结束了，EMBL-EBI的数据中心仍然获得了Wellcome Trust的基金资助来维护和扩充这个数据库。</p>
 <p>IGSR（International Genome Sample Resource）想实现的目标：</p>
 <ul>
@@ -280,12 +280,12 @@
 <p><a href="https://www.genome.gov/Pages/Research/DER/ICHG-1000GenomesTutorial/How_to_Access_the_Data.pdf">How_to_Access_the_Data.pdf</a></p>
 <p>因为数据库是免费公开提供的，所以没有收集表型信息，<a href="ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/working/20130606_sample_info/20130606_g1k.ped">ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/working/20130606_sample_info/20130606_g1k.ped</a> 提供样本的ID，种群，性别，家族关系的信息。</p>
 <p>样本个体的种群（国家及地区）都有相对应的代码，对应说明如下：</p>
-<h3 id="populations"><strong>Populations</strong></h3>
+<h3 id="populations">Populations</h3>
 <p>This file describes the population codes where assigned to samples collected for the 1000 Genomes project. These codes are used to organise the files in the data_collections' project data directories and can also be found in column 11 of many sequence index files.</p>
 <p>There are also two tsv files, which contain the population codes and descriptions for both the sub and super populations that were used in phase 3 of the 1000 Genomes Project:</p>
 <p><a href="ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/20131219.populations.tsv">ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/20131219.populations.tsv</a></p>
 <p><a href="ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/20131219.superpopulations.tsv">ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/20131219.superpopulations.tsv</a></p>
-<h3 id="populationscodes"><strong>Populations codes</strong></h3>
+<h3 id="populationscodes">Populations codes</h3>
 <pre><code>         CHB	Han Chinese             Han Chinese in Beijing, China
          JPT	Japanese                Japanese in Tokyo, Japan
          CHS	Southern Han Chinese    Han Chinese South
@@ -317,7 +317,7 @@
          BEB	Bengali                 Bengali in Bangladesh
          STU	Sri Lankan              Sri Lankan Tamil in the UK
          ITU	Indian                  Indian Telugu in the UK
-</code></pre><h2 id="二数据查询与下载"><strong>二、数据查询与下载</strong></h2>
+</code></pre><h2 id="二数据查询与下载">二、数据查询与下载</h2>
 <p><a href="https://www.internationalgenome.org/data">Data | 1000 Genomes</a></p>
 <h3 id="查询数据">查询数据</h3>
 <ul>
