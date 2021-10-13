@@ -7,7 +7,7 @@
     <title>bcftools学习笔记 | 🏡My Blog</title>
 
     
-<link href="./img/icon.png" rel="shortcut icon" type="image/x-icon" />
+<link href="icon.ico" rel="shortcut icon" type="image/x-icon" />
 
 
 
@@ -91,7 +91,7 @@
 
 
 
-<link rel="stylesheet" data-highlight href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/tomorrow.min.css" />
+<link rel="stylesheet" data-highlight href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/gruvbox-light.min.css" />
 
 
 
@@ -178,9 +178,7 @@
               
 
               | 
-                  
-                    Tuesday, Aug 24, 2021
-                  
+                  <span data-format="luxon">2021-08-24T17:22:05&#43;09:00</span>
                 
 
               | 5 minutes read
@@ -188,9 +186,7 @@
               
               | Update at
                 
-                  
-                    Tuesday, Aug 24, 2021
-                  
+                  <span data-format="luxon">2021-08-24T17:22:05&#43;09:00</span>
                 
               
             </span>
@@ -214,6 +210,8 @@
       </header>
 
       <article class="main">
+        
+        <img class="cover" src="/img/bcftools-cover.jpg" />
         
 
         <hr>
@@ -524,6 +522,12 @@ chr1	889450	rs58931985	C	A	100	PASS	AC=0;AF=0.00159744;AN=2;NS=2504;DP=16149;EAS
       <div class="ui medium header">Social Links</div>
       <nav class="ui secondary menu dream-menu dream-socials">
   
+  <div class="item">
+    <a href="/index.xml">
+      <i class="large rss square icon" title="RSS"></i>
+    </a>
+  </div>
+  
 
   
   <div class="item">
@@ -618,7 +622,7 @@ chr1	889450	rs58931985	C	A	100	PASS	AC=0;AF=0.00159744;AN=2;NS=2504;DP=16149;EAS
   window.darkNav =  null 
   window.maxTags =  null 
   window.hasTwitterEmbed =  null 
-  window.fixedNav =  null 
+  window.fixedNav =  true 
 
   if (window.hasTwitterEmbed) {
     
@@ -660,6 +664,21 @@ chr1	889450	rs58931985	C	A	100	PASS	AC=0;AF=0.00159744;AN=2;NS=2504;DP=16149;EAS
     
 
 
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "en" }).toFormat("yyyy-MM-dd"))
+    })
+  }
+</script>
+
+
 
 <script src="/js/scrollToTop.js"></script>
 
@@ -682,8 +701,8 @@ chr1	889450	rs58931985	C	A	100	PASS	AC=0;AF=0.00159744;AN=2;NS=2504;DP=16149;EAS
     var isDark = localStore.getItem('hugo-theme-dream-is-dark')
     isDark = isDark ? isDark : window.defaultDark ? 'y' : isDark
 
-    var lightTheme = "tomorrow"
-    var darkTheme = "tomorrow-night"
+    var lightTheme = "gruvbox-light"
+    var darkTheme = "gruvbox-dark"
     var theme = isDark === 'y' ? darkTheme : lightTheme
 
     $('link[data-highlight]').attr('href', 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/' + theme + '.min.css')

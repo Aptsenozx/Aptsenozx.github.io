@@ -7,7 +7,7 @@
     <title> | 🏡My Blog</title>
 
     
-<link href="./img/icon.png" rel="shortcut icon" type="image/x-icon" />
+<link href="icon.ico" rel="shortcut icon" type="image/x-icon" />
 
 
 
@@ -220,7 +220,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        Tuesday, Oct 12, 2021
+        
+          <span data-format="luxon">2021-10-12T16:52:05&#43;09:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -251,7 +253,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        Monday, Sep 13, 2021
+        
+          <span data-format="luxon">2021-09-13T11:20:55&#43;09:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -282,7 +286,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        Tuesday, Aug 24, 2021
+        
+          <span data-format="luxon">2021-08-24T17:22:05&#43;09:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -313,7 +319,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        Tuesday, Aug 17, 2021
+        
+          <span data-format="luxon">2021-08-17T16:27:28&#43;09:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -344,7 +352,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        Thursday, Jul 29, 2021
+        
+          <span data-format="luxon">2021-07-29T17:10:19&#43;09:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -375,7 +385,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        Saturday, Jul 24, 2021
+        
+          <span data-format="luxon">2021-07-24T17:00:23&#43;09:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -406,7 +418,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        Monday, Jul 5, 2021
+        
+          <span data-format="luxon">2021-07-05T23:08:30&#43;09:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -437,7 +451,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        Saturday, Jul 3, 2021
+        
+          <span data-format="luxon">2021-07-03T21:51:47&#43;09:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -468,7 +484,9 @@
     </h2>
     <div class="meta">
       <p class="date">
-        Tuesday, Jun 15, 2021
+        
+          <span data-format="luxon">2021-06-15T21:11:55&#43;09:00</span>
+        
       </p>
     </div>
     <div class="description">
@@ -596,6 +614,12 @@
       <div class="ui medium header">Social Links</div>
       <nav class="ui secondary menu dream-menu dream-socials">
   
+  <div class="item">
+    <a href="/index.xml">
+      <i class="large rss square icon" title="RSS"></i>
+    </a>
+  </div>
+  
 
   
   <div class="item">
@@ -690,7 +714,7 @@
   window.darkNav =  null 
   window.maxTags =  null 
   window.hasTwitterEmbed =  null 
-  window.fixedNav =  null 
+  window.fixedNav =  true 
 
   if (window.hasTwitterEmbed) {
     
@@ -730,6 +754,21 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-chtml.js"></script>
     
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"></script>
+
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "en" }).toFormat("yyyy-MM-dd"))
+    })
+  }
+</script>
 
 
 
