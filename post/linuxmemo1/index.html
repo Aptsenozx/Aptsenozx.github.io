@@ -157,6 +157,8 @@
     </li>
     <li><a href="#sort排序">sort排序</a></li>
     <li><a href="#定时执行命令">定时执行命令</a></li>
+    <li><a href="#sed命令">sed命令</a></li>
+    <li><a href="#cut命令字符截取">cut命令字符截取</a></li>
   </ul>
 </nav>
     </div>
@@ -179,7 +181,7 @@
                   <span data-format="luxon">2021-10-12T16:52:05&#43;09:00</span>
                 
 
-              | 4 minutes read
+              | 6 minutes read
 
               
               | Update at
@@ -321,6 +323,42 @@ numeric -n, random -R, version -V</li>
 <p><code>crontab</code>命令。</p>
 <p><code>crontab</code> <code>-l</code> 查看当前任务</p>
 <p><code>crontab</code> <code>-e</code> 修改任务列表</p>
+<h2 id="sed命令">sed命令</h2>
+<p><a href="https://cloud.tencent.com/developer/news/652760">Linux 生产环境上，最常用的一套 &quot; Sed &quot; 技巧</a></p>
+<p>sed命令用来处理、编辑一个或多个文件。</p>
+<p><strong>语法：</strong></p>
+<p><code>sed [-hnV][-e&lt;script&gt;][-f&lt;script文件&gt;][文本文件]</code></p>
+<p><strong>参数：</strong></p>
+<ul>
+<li>e<script>或&ndash;expression=<script> 以选项中指定的script来处理输入的文本文件。</li>
+<li>f&lt;script文件&gt;或&ndash;file=&lt;script文件&gt; 以选项中指定的script文件来处理输入的文本文件。</li>
+<li>h或&ndash;help 显示帮助。</li>
+<li>n或&ndash;quiet或&ndash;silent 仅显示script处理后的结果。</li>
+<li>V或&ndash;version 显示版本信息。</li>
+</ul>
+<p><strong>动作说明：</strong></p>
+<ul>
+<li>a ：新增， a 的后面接字符串，这些字符串会在新的一行出现(目前的下一行)</li>
+<li>c ：取代， c 的后面接字符串，这些字串可以取代 n1,n2 之间的行</li>
+<li>d ：删除， 后面通常不接任何值</li>
+<li>i ：插入， i 的后面可以接字符串，而这些字符串会在新的一行出现(目前的上一行)</li>
+<li>p ：打印，将某个选择的数据打印。通常 p 会与参数 sed -n 一起运行</li>
+<li>s ：取代，可以直接进行取代（下面会细讲格式），通常这个 s 的动作可以搭配正规表示法</li>
+</ul>
+<p>（待续）</p>
+<hr>
+<h2 id="cut命令字符截取">cut命令字符截取</h2>
+<p>选取信息是针对行进行的。从每一行剪切字节、字符、和字段写至标准输出。如果不指定file文件，则从标准输入读取。</p>
+<p>cut命令默认以tab制表符作为分隔符。且只能以一个字符作为分隔符。</p>
+<p>参数说明：</p>
+<ul>
+<li>b：以字节为单位分割提取，可以指定字节范围，比如1-3表示第1到3个字节。这些字节位置会忽略多字节字符边界，除非也同时指定了n参数</li>
+<li>c：以字符为单位分割。如果是英文字符就都是单字节，和b参数一样，如果是双字节的汉字，就会以汉字字符为单位分割</li>
+<li>d：自定义分隔符，不指定该参数则为tab制表符</li>
+<li>f：与-d参数一起使用，指定显示分割后的哪个field</li>
+<li>n：取消分割多节字符。和-b参数一起使用（-nb）。如果字符最后一个字节落在-b参数指定的范围内，则被输出，否则，将被排除。换句话说就是以字节分隔但是不拆开多字节字符。</li>
+</ul>
+<p>以空格分隔时：<code>-d ' '</code></p>
 <hr>
       </article>
     </section>
