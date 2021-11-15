@@ -2,8 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://aptsenozx.github.io/post/11%E6%9C%88/</loc>
+    <lastmod>2021-11-15T12:53:13+09:00</lastmod>
+  </url><url>
     <loc>https://aptsenozx.github.io/categories/</loc>
-    <lastmod>2021-10-26T15:20:34+09:00</lastmod>
+    <lastmod>2021-11-15T12:53:13+09:00</lastmod>
+  </url><url>
+    <loc>https://aptsenozx.github.io/post/</loc>
+    <lastmod>2021-11-15T12:53:13+09:00</lastmod>
+  </url><url>
+    <loc>https://aptsenozx.github.io/tags/</loc>
+    <lastmod>2021-11-15T12:53:13+09:00</lastmod>
+  </url><url>
+    <loc>https://aptsenozx.github.io/tags/%E6%97%A5%E8%AE%B0/</loc>
+    <lastmod>2021-11-15T12:53:13+09:00</lastmod>
+  </url><url>
+    <loc>https://aptsenozx.github.io/categories/%E9%9A%8F%E7%AC%94/</loc>
+    <lastmod>2021-11-15T12:53:13+09:00</lastmod>
+  </url><url>
+    <loc>https://aptsenozx.github.io/</loc>
+    <lastmod>2021-11-15T12:53:13+09:00</lastmod>
   </url><url>
     <loc>https://aptsenozx.github.io/tags/cs/</loc>
     <lastmod>2021-10-26T15:20:34+09:00</lastmod>
@@ -11,16 +29,7 @@
     <loc>https://aptsenozx.github.io/post/vim/</loc>
     <lastmod>2021-10-26T15:20:34+09:00</lastmod>
   </url><url>
-    <loc>https://aptsenozx.github.io/post/</loc>
-    <lastmod>2021-10-26T15:20:34+09:00</lastmod>
-  </url><url>
-    <loc>https://aptsenozx.github.io/tags/</loc>
-    <lastmod>2021-10-26T15:20:34+09:00</lastmod>
-  </url><url>
     <loc>https://aptsenozx.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-10-26T15:20:34+09:00</lastmod>
-  </url><url>
-    <loc>https://aptsenozx.github.io/</loc>
     <lastmod>2021-10-26T15:20:34+09:00</lastmod>
   </url><url>
     <loc>https://aptsenozx.github.io/post/linuxmemo1/</loc>
@@ -57,12 +66,6 @@
     <lastmod>2021-07-05T23:08:30+09:00</lastmod>
   </url><url>
     <loc>https://aptsenozx.github.io/post/june/</loc>
-    <lastmod>2021-07-03T21:51:47+09:00</lastmod>
-  </url><url>
-    <loc>https://aptsenozx.github.io/tags/%E6%97%A5%E8%AE%B0/</loc>
-    <lastmod>2021-07-03T21:51:47+09:00</lastmod>
-  </url><url>
-    <loc>https://aptsenozx.github.io/categories/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2021-07-03T21:51:47+09:00</lastmod>
   </url><url>
     <loc>https://aptsenozx.github.io/post/first-post/</loc>
