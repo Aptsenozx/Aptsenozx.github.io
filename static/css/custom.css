@@ -1,0 +1,18 @@
+/* 让文章正文区域有白色背景、内边距和圆角阴影，提升可读性 */
+
+/* 让文章正文区域有白底、内边距、圆角与阴影 */
+#dream-single-post-main {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.06);
+  }
+  
+  /* 如果主题有暗色模式且你想夜间改为深底，可加这段（Tailwind 常用 .dark 作为根类） */
+  .dark #dream-single-post-main {
+    background: rgba(30, 30, 30, 0.8);           /* 或者 #1a1a1a */
+    box-shadow: 0 4px 16px rgba(0,0,0,.3);
+  }
+  
+
+  
